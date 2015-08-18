@@ -1,73 +1,88 @@
-Bashmarks {#readmeTitle}
+Bashmarks
 =====
 
 Bashmarks is a shell script that allows you to save and jump to commonly used directories with tab completion. Also works with zsh
-{#description}
 
 Extra Features
 --------------
 
-* default directory when using `g` - default `$HOME`.
-* Allows placing commands after the the letter e.g `g webfolder ls` would go the webfolder bookmark then perform `ls`
-* `g -` Goes to the previous directory.
-* `o command` to open the bookmark in Finder (Mac OS X Only).
-* `y command` to open the bookmark in a new tab (Mac OS X Only).
-* the `y command` works with Terminal and ITerm2
+* default directory when using `jump` - default `$HOME`.
+* Allows placing commands after the the letter e.g `mark webfolder ls` would go the webfolder bookmark then perform `ls`
+* `jump -` Goes to the previous directory.
+* `marko command` to open the bookmark in Finder (Mac OS X Only).
+* `markt command` to open the bookmark in a new tab (Mac OS X Only).
+* the `markt command` works with Terminal and ITerm2
 
 Install
 -------
 
+##### Either:  
 1. git clone git://github.com/Bilalh/shellmarks.git
 2. cd shellmarks
-2. make install  (or just put bashmarks.sh in your $PATH and source `it`  )
+2. make install
+3. **source ~/.local/bin/bashmarks.sh** from within your **~.bash\_profile** or **~/.bashrc** file
+
+##### or simply
+1. Download the project (zip)
+2. move the bashmarks.sh to somewhere in your path `$PATH` and source it
 3. **source ~/.local/bin/bashmarks.sh** from within your **~.bash\_profile** or **~/.bashrc** file
 
 Shell Commands
 --------------
 
-	s <bookmark_name>  - Saves the current directory as "bookmark_name"
-	g <bookmark_name>  - Goes (cd) to the directory associated with "bookmark_name"
-	d <bookmark_name>  - Deletes the bookmark
-	l <bookmark_name>  - Lists the specified bookmark associated with "bookmark_name"
-	l                  - Lists all available bookmarks
-	s                  - Saves the default directory
-	g                  - Goes to the default directory
-	g -                - Goes to the previous directory
-	_p <bookmark_name> - Prints the directory associated with "bookmark_name"
-    
-	# Mac OS X Only 
-	o <bookmark_name>  - Open the directory associated with "bookmark_name" in Finder
-	y <bookmark_name>  - Open the directory associated with "bookmark_name" in a new tab
+	mark  <bookmark_name>  - Saves the current directory as "bookmark_name"
+	jump  <bookmark_name>  - Goes (cd) to the directory associated
+                             with "bookmark_name"
+	markd <bookmark_name>  - Deletes the bookmark'
+
+	mark                   - Saves the current directory with its name
+	jump                   - Goes to the $HOME directory
+	jump -                 - Goes to the previous directory
+	markl                  - Lists all available bookmarks
+	markl -n               - Lists all, only name
+	markl -c               - Lists all, without formatting
+	markl <prefix>         - Lists the bookmark starting with "prefix"
+	markp <bookmark_name>  - Prints the directory associated with "bookmark_name"
+	markpd <bookmark_name> - Same as "mark" but uses pushd
+	
+	# Mac OS X Only
+	marko <bookmark_name> - Open the directory associated with "bookmark_name"
+                            in Finder
+	markt <bookmark_name> - Open the directory associated with "bookmark_name"
+	                        in a new tab'
+
 
 Example Usage
 -------------
-
-	$ cd /var/www/
-	$ s webfolder
-	$ cd /usr/local/lib/
-	$ s locallib
-	$ l
-		webfolder	 /var/www/
-		locallib	 /usr/local/lib/
-	$ g web<tab>
-	$ g webfolder	  # cd to /var/www/
-	$ o webfolder	  # Open in Finder if on mac
-	$ l locallib
-		locallib	 /usr/local/lib/
+<pre>
+$ cd /var/www/
+$ mark webfolder
+$ cd /usr/local/lib/
+$ mark locallib
+$ markl
+	<b>webfolder</b>	/var/www/
+	<b>locallib</b>		/usr/local/lib/
+$ mark web&lt;tab&gt;       # autocomplete
+$ mark webfolder	  # cd to /var/www/
+$ marko webfolder	  # Open in Finder if on mac
+$ markl locallib
+	<b>locallib</b>		/usr/local/lib/
+</pre>
 		
 Options
 -------
 
-Set `BASHMARKS_ITERM_SESSION` to a session name to change the session that is launched when using `y` in iTerm2 on `osx` 
+Set `BASHMARKS_ITERM_SESSION` to a session name to change the session that is launched when using `markt` in iTerm2 on `osx` 
 
         
 Where Bashmarks are stored
 --------------------------
     
-All of your directory bookmarks are saved in a file called `.sdirs` in your `$HOME` directory by default.
+All of your directory bookmarks are saved in a file called `.bashmarks` in your `$HOME` directory by default.
 
 Authors
 -------
+* Fredrik Johansson
 * Bilal Syed Hussain
 * Huy Nguyen (original version)
 
