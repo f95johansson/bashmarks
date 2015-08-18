@@ -9,16 +9,16 @@ Extra Features
 * default directory when using `jump` - default `$HOME`.
 * Allows placing commands after the the letter e.g `mark webfolder ls` would go the webfolder bookmark then perform `ls`
 * `jump -` Goes to the previous directory.
-* `marko command` to open the bookmark in Finder (Mac OS X Only).
-* `markt command` to open the bookmark in a new tab (Mac OS X Only).
-* the `markt command` works with Terminal and ITerm2
+* `marko` command to open the bookmark in Finder (Mac OS X Only).
+* `markt` command to open the bookmark in a new tab (Mac OS X Only).
+* the `markt` command works with Terminal and ITerm2
 
 Install
 -------
 
-##### Either:  
-1. git clone git://github.com/Bilalh/shellmarks.git
-2. cd shellmarks
+##### Either (from terminal):
+1. git clone https://github.com/f95johansson/bashmarks.git
+2. cd bashmarks
 2. make install
 3. **source ~/.local/bin/bashmarks.sh** from within your **~.bash\_profile** or **~/.bashrc** file
 
