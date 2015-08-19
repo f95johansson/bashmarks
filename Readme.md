@@ -7,7 +7,7 @@ Extra Features
 --------------
 
 * default directory when using `jump` - default `$HOME`.
-* Allows placing commands after the the letter e.g `mark webfolder ls` would go the webfolder bookmark then perform `ls`
+* Allows placing commands after the the letter e.g `jump webfolder ls` would go the webfolder bookmark then perform `ls`
 * `jump -` Goes to the previous directory.
 * `marko` command to open the bookmark in Finder (Mac OS X Only).
 * `markt` command to open the bookmark in a new tab (Mac OS X Only).

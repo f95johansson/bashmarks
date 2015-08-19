@@ -35,7 +35,10 @@
 # markd <bookmark_name>  - Deletes the bookmark'
 # 
 # mark                   - Saves the current directory with its name
+# mark -t                - Saves the current directory with as a temp,
+#                          only for this session
 # jump                   - Goes to the $HOME directory
+# jump -t                - Goes to the temp bookmark
 # jump -                 - Goes to the previous directory
 # markl                  - Lists all available bookmarks
 # markl -n               - Lists all, only name
@@ -54,8 +57,7 @@
 
 
 # TODO
-# • Redo Default behavior/directory
-#
+# • Rework Default behavior/directory
 
 # setup file to store bookmarks
 if [ ! -n "$BASHMARKS_SDIRS" ]; then
@@ -69,6 +71,7 @@ touch $BASHMARKS_SDIRS
 # save current directory to bookmarks
 function mark {
     BASHMARKS_help $1
+    BASHMARKS_mark_temp $1
     BASHMARKS_bookmark_name_valid "$@"
     if [ -z "$BASHMARKS_exit_message" ]; then
         local name
@@ -100,6 +103,9 @@ function jump {
         shift; $*
     elif [[ "$1" == ".."  || "$1" == '~' || "$1" == '/' ]]; then
         cd $1;
+        BASHMARKS__print_pwd_on_action; shift; $*
+    elif [[ "$1" == "-t" || "$1" == "-temp" || "$1" == "--temp" ]]; then
+        cd "$(eval $(echo echo $(echo \$DIR_TEMP)))"
         BASHMARKS__print_pwd_on_action; shift; $*
     else
         cd "$(eval $(echo echo $(echo \$DIR_$1)))"
@@ -289,6 +295,18 @@ function BASHMARKS__print_pwd_on_action {
      [ -z "$BASHMARKS_NO_PWD" ] && pwd
 }
 
+function BASHMARKS_mark_temp {
+    if [ "$1" = "-t" ] || [ "$1" = "-temp" ] || [ "$1" = "--temp" ] ; then
+        local name=TEMP
+        BASHMARKS_purge_line "$BASHMARKS_SDIRS" "export DIR_$name="
+        local CURDIR=$(echo $PWD| sed "s#^$HOME#\$HOME#g")
+        echo "export DIR_$name=\"$CURDIR\"" >> $BASHMARKS_SDIRS
+        
+        # end function
+        kill -SIGINT $$
+    fi
+}
+
 function BASHMARKS_markl_no_colour {
     source $BASHMARKS_SDIRS
     env | grep "^DIR_" | cut -c5-    | grep "^.*=" | sort
@@ -394,3 +412,4 @@ if [ $BASHMARKS_k ]; then
 
 fi
 
+markd TEMP # delete temp bookmark if avaible (to make it only for session)
