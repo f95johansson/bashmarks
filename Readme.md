@@ -36,7 +36,10 @@ Shell Commands
 	markd <bookmark_name>  - Deletes the bookmark'
 
 	mark                   - Saves the current directory with its name
+	mark -t                - Saves the current directory with as a temp,
+                             only for this session
 	jump                   - Goes to the $HOME directory
+	jump -t                - Goes to the temp bookmark
 	jump -                 - Goes to the previous directory
 	markl                  - Lists all available bookmarks
 	markl -n               - Lists all, only name
